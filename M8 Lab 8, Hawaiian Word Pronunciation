@@ -1,0 +1,40 @@
+def haw_pro():
+    haw_word_pro = ''
+    valid_char_list = [' ', "'", 'a', 'e', 'h', 'i', 'k', 'l', 'm', 'n', 'o', 'p', 'u', 'w']
+    conso_pro = {'h':'h', 'k':'k', 'l':'l', 'm': 'm', 'n':'n', 'p':'p', 'w':'w'}
+    vowel_pro = {'a':'ah', 'e':'eh', 'i':'ee', 'o':'oh', 'u':'oo'}
+    vowel_pair_pro = {'ai':'eye', 'ae':'eye', 'ao':'ow', 'au':'ow', 'ei':'ay', 'eu':'eh-oo', 'iu':'ew', 'oi':'oyo', 'ou':'ow', 'ui':'ooey'}
+
+    while True:
+        haw_word = str(input("Enter a valid Hawaiian word to pronounce:"))
+        valid_word = True
+        for character in haw_word:
+            if character not in valid_char_list:
+                valid_word = False
+                break
+        if valid_word:
+            break
+        else: 
+            haw_word = str(input("Enter a valid Hawaiian word to pronounce:"))
+
+    for letter in haw_word:
+        if letter in conso_pro.keys():
+            haw_word_pro += conso_pro[letter] 
+        elif letter in vowel_pro.keys():
+            haw_word_pro += vowel_pro[letter] + '-'
+
+    if 'iw' in haw_word or 'ew' in haw_word:
+        haw_word_pro = haw_word_pro.replace('w', 'v')
+    if "'" in haw_word:
+        haw_word_pro = haw_word_pro.replace('-', "'")
+
+    haw_word_pro = haw_word_pro[:-1]
+    print(haw_word + ' is prounounced ' + haw_word_pro)
+
+    new_word = str(input('Do you want to enter another word? Yes/n or no/n:')).lower()
+    if new_word == 'yes' or new_word == 'y':
+        print('')
+        haw_pro()
+    elif new_word == 'no' or new_word == 'n':
+        return None
+haw_pro()
